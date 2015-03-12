@@ -1,4 +1,7 @@
 # Lumpy
+
+![Lumpy pypi](http://img.shields.io/pypi/v/Lumpy.png)
+
 Sends an email to a **single recipient** straight to his MTA.
 Looks up for the MX DNS records of the recipient SMTP server and attempts the delivery through them.
 
