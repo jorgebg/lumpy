@@ -1,6 +1,9 @@
 # Lumpy
 
-![Lumpy pypi](http://img.shields.io/pypi/v/Lumpy.png)
+![http://img.shields.io/pypi/v/Lumpy.png](https://pypi.python.org/pypi/Lumpy)
+[![Requirements Status](https://requires.io/github/jorgebg/lumpy/requirements.svg?branch=master)](https://requires.io/github/jorgebg/lumpy/requirements/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/jorgebg/lumpy/badge.svg)](https://coveralls.io/r/jorgebg/lumpy)
+![http://img.shields.io/badge/license-MIT-green.png](https://github.com/jorgebg/lumpy/blob/master/LICENSE)
 
 Sends an email to a **single recipient** straight to his MTA.
 Looks up for the MX DNS records of the recipient SMTP server and attempts the delivery through them.
