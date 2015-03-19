@@ -5,6 +5,8 @@
 [![Coverage Status](https://coveralls.io/repos/jorgebg/lumpy/badge.svg)](https://coveralls.io/r/jorgebg/lumpy)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/jorgebg/lumpy/blob/master/LICENSE)
 
+[![Stories in Ready](https://badge.waffle.io/jorgebg/falaciaslogicas.com.svg)](http://waffle.io/jorgebg/falaciaslogicas.com)
+
 Sends an email to a **single recipient** straight to his MTA.
 Looks up for the MX DNS records of the recipient SMTP server and attempts the delivery through them.
 
