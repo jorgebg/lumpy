@@ -5,6 +5,7 @@ VERSION = '0.1.0'
 setup(
   name='Lumpy',
   version=VERSION,
+  description='Sends an email to a single recipient straight to his MTA',
   py_modules=['lumpy'],
   scripts=['scripts/lumpy'],
   install_requires=[
