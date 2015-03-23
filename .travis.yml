@@ -6,8 +6,14 @@ python:
   - 3.3
   - 3.4
   - nightly
-install: python setup.py install
-script: py.test
+install:
+  - python setup.py install
+  - pip install coveralls
+script:
+  - python test_lumpy.py
+  - coverage run --source=lumpy test_lumpy.py
+after_success:
+  coveralls
 deploy:
   provider: pypi
   user: jorgebg

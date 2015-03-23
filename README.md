@@ -1,6 +1,7 @@
 # Lumpy
 
 [![Pypy](https://img.shields.io/pypi/v/Lumpy.svg)](https://pypi.python.org/pypi/Lumpy)
+[![Build Status](https://travis-ci.org/jorgebg/lumpy.svg)](https://travis-ci.org/jorgebg/lumpy)
 [![Requirements Status](https://requires.io/github/jorgebg/lumpy/requirements.svg?branch=master)](https://requires.io/github/jorgebg/lumpy/requirements/?branch=master)
 [![Coverage Status](https://coveralls.io/repos/jorgebg/lumpy/badge.svg)](https://coveralls.io/r/jorgebg/lumpy)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/jorgebg/lumpy/blob/master/LICENSE)
@@ -50,8 +51,7 @@ lumpy bmo@ooo.land --mx smtp1.ooo.land,smtp2.ooo.land
 
 ### Programmatically
 
-Use `lumpy.Mail(self, recipient, sender='jorge@example.com', subject='Sir! My sir!', body='A message from their majesty.', port=25, mxrecords=[], verbose=False)
-`
+Use `lumpy.Mail(self, recipient, sender='jorge@example.com', subject='Sir! My sir!', body='A message from their majesty.', port=25, mxrecords=[], verbose=False)`
 
 ```python
 from lumpy import Mail
