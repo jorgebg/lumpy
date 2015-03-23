@@ -1,18 +1,19 @@
 from setuptools import setup
 
-VERSION = '0.1.0'
+import lumpy
 
 setup(
-  name='Lumpy',
-  version=VERSION,
-  py_modules=['lumpy'],
-  scripts=['scripts/lumpy'],
-  install_requires=[
-      'dnspython',
+  name = 'Lumpy',
+  description = lumpy.__doc__,
+  version = lumpy.__version__,
+  packages = ['lumpy'],
+  scripts = ['scripts/lumpy'],
+  install_requires = [
+    'dnspython',
   ],
-  author = 'Jorge Barata',
   url = 'https://github.com/jorgebg/lumpy',
-  download_url = 'https://github.com/jorgebg/lumpy/tarball/0.1.0',
-  license = 'MIT',
+  author = lumpy.__author__,
+  author_email = lumpy.__author_email__,
+  license = lumpy.__license__,
   keywords = ['mta', 'mua', 'mail', 'smtp', 'mx']
 )
