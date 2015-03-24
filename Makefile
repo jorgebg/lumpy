@@ -21,4 +21,5 @@ release:
 	#  make patch release
 	#  make minor release
 	#  make major release
-	git push --tags
+	git push origin master
+	git push origin `git describe --abbrev=0 --tags`
