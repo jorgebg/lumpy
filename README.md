@@ -51,8 +51,16 @@ lumpy bmo@ooo.land --mx smtp1.ooo.land,smtp2.ooo.land
 
 ### Programmatically
 
-Use `lumpy.Mail(self, recipient, sender='jorge@example.com', subject='Sir! My sir!', body='A message from their majesty.', port=25, mxrecords=[], verbose=False)`
+#### Method signature
+```python
+lumpy.Mail(self,
+      recipient, sender='jorge@example.com',
+      subject='Sir! My sir!', body='A message from their majesty.',
+      port=25, mxrecords=[]
+)
+```
 
+#### Example
 ```python
 from lumpy import Mail
 m = Mail('finn@ooo.land')
