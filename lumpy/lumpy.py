@@ -7,10 +7,10 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-import dns.resolver
-
-
 class Mail(object):
+    """
+    Sends an email to a single recipient straight to his MTA.
+    """
 
     def __init__(self, recipient, sender=None, subject=None, body=None, port=None, mxrecords=None,  verbose = False):
         self.verbose = verbose
@@ -45,6 +45,10 @@ class Mail(object):
         return m
 
     def dnsquery(self):
+        """
+        Looks up for the MX DNS records of the recipient SMTP server
+        """
+        import dns.resolver
         if self.verbose:
             print('Resolving DNS query...')
         answers = dns.resolver.query(self.domain, 'MX')
@@ -58,8 +62,7 @@ class Mail(object):
 
     def send(self):
         """
-        Sends an email to a single recipient straight to his MTA.
-        Looks up for the MX DNS records of the recipient SMTP server and attempts the delivery through them.
+        Attempts the delivery through recipient's domain MX records.
         """
         try:
             for mx in self.mxrecords:

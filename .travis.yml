@@ -7,13 +7,13 @@ python:
   - 3.4
   - nightly
 install:
-  - pip install -r requirements.txt
+  - python setup.py install
   - pip install coveralls
 script:
   - python test_lumpy.py
   - coverage run --source=lumpy test_lumpy.py
 after_success:
-  coveralls
+  - coveralls
 deploy:
   provider: pypi
   user: jorgebg
