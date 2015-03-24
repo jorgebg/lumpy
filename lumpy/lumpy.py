@@ -54,9 +54,9 @@ class Mail(object):
         answers = dns.resolver.query(self.domain, 'MX')
         addresses = [answer.exchange.to_text() for answer in answers]
         if self.verbose:
-            print('{} records found:'.format(len(addresses)))
+            print('{0} records found:'.format(len(addresses)))
             for a in addresses:
-                print('  {}'.format(a))
+                print('  {0}'.format(a))
             print('')
         return addresses
 
@@ -67,7 +67,7 @@ class Mail(object):
         try:
             for mx in self.mxrecords:
                 if self.verbose:
-                    print('Connecting to {} {}...'.format(mx, self.port))
+                    print('Connecting to {0} {1}...'.format(mx, self.port))
                 server = smtplib.SMTP(mx, self.port)
                 server.set_debuglevel(self.verbose)
                 server.sendmail(self.sender, [self.recipient], self.message.as_string())
@@ -75,12 +75,12 @@ class Mail(object):
                 break
         except IOError as e:
             if e.errno in (errno.ENETUNREACH, errno.ECONNREFUSED):
-                sys.stderr.writelines('Looks like port {} is blocked: {}\n'.format(self.port, e))
+                sys.stderr.writelines('Looks like port {0} is blocked: {1}\n'.format(self.port, e))
             if self.verbose:
                 raise e
 
     class Defaults:
-        Sender = '{}@example.com'.format(getpass.getuser())
+        Sender = '{0}@example.com'.format(getpass.getuser())
         Subject = 'Sir! My sir!'
         Body = 'A message from their majesty.'
         Port = smtplib.SMTP_PORT
