@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/jorgebg/lumpy.svg)](https://travis-ci.org/jorgebg/lumpy)
 [![Requirements Status](https://requires.io/github/jorgebg/lumpy/requirements.svg?branch=master)](https://requires.io/github/jorgebg/lumpy/requirements/?branch=master)
 [![Coverage Status](https://coveralls.io/repos/jorgebg/lumpy/badge.svg)](https://coveralls.io/r/jorgebg/lumpy)
-[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/jorgebg/lumpy/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/pypi/l/Lumpy.svg)](https://github.com/jorgebg/lumpy/blob/master/LICENSE)
 
 [![Stories in Ready](https://badge.waffle.io/jorgebg/lumpy.svg)](http://waffle.io/jorgebg/lumpy)
 
