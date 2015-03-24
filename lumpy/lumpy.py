@@ -4,6 +4,7 @@ import getpass
 import errno
 import re
 import smtplib
+import logging
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -12,9 +13,7 @@ class Mail(object):
     Sends an email to a single recipient straight to his MTA.
     """
 
-    def __init__(self, recipient, sender=None, subject=None, body=None, port=None, mxrecords=None,  verbose = False):
-        self.verbose = verbose
-
+    def __init__(self, recipient, sender=None, subject=None, body=None, port=None, mxrecords=None):
         self.recipient = recipient
         self.sender = sender or self.Defaults.Sender
         self.subject = subject or self.Defaults.Subject
@@ -49,15 +48,10 @@ class Mail(object):
         Looks up for the MX DNS records of the recipient SMTP server
         """
         import dns.resolver
-        if self.verbose:
-            print('Resolving DNS query...')
+        logging.info('Resolving DNS query...')
         answers = dns.resolver.query(self.domain, 'MX')
         addresses = [answer.exchange.to_text() for answer in answers]
-        if self.verbose:
-            print('{0} records found:'.format(len(addresses)))
-            for a in addresses:
-                print('  {0}'.format(a))
-            print('')
+        logging.info('{0} records found:\n{1}'.format(len(addresses), '\n  '.join(addresses)))
         return addresses
 
     def send(self):
@@ -66,18 +60,19 @@ class Mail(object):
         """
         try:
             for mx in self.mxrecords:
-                if self.verbose:
-                    print('Connecting to {0} {1}...'.format(mx, self.port))
+                logging.info('Connecting to {0} {1}...'.format(mx, self.port))
                 server = smtplib.SMTP(mx, self.port)
-                server.set_debuglevel(self.verbose)
+                server.set_debuglevel(logging.root.level < logging.WARN)
                 server.sendmail(self.sender, [self.recipient], self.message.as_string())
                 server.quit()
-                break
-        except IOError as e:
-            if e.errno in (errno.ENETUNREACH, errno.ECONNREFUSED):
-                sys.stderr.writelines('Looks like port {0} is blocked: {1}\n'.format(self.port, e))
-            if self.verbose:
+                return True
+        except Exception as e:
+            logging.error(e)
+            if isinstance(e, IOError) and e.errno in (errno.ENETUNREACH, errno.ECONNREFUSED):
+                logging.error('Please check that port {0} is open'.format(self.port))
+            if logging.root.level < logging.WARN:
                 raise e
+        return False
 
     class Defaults:
         Sender = '{0}@example.com'.format(getpass.getuser())
@@ -90,6 +85,9 @@ class App(object):
 
     def run(self):
         args = self.parse()
+        if args.verbose:
+            logging.root.level = logging.INFO
+        del args.verbose
         Mail(**args.__dict__).send()
 
     @classmethod
