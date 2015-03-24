@@ -41,7 +41,7 @@ class MTAMock(object):
             log.write('---------- MESSAGE FOLLOWS ----------')
             for line in lines:
                 if inheaders and not line:
-                    log.write('X-Peer: {0}'.format(peer[0]))
+                    log.write('X-Peer: {}'.format(peer[0]))
                     inheaders = 0
                 log.write(line)
             log.write('------------ END MESSAGE ------------')
@@ -53,7 +53,7 @@ class MailTest(unittest.TestCase):
 
     def setUp(self):
         self.host = 'gmail.com'
-        self.mail = lumpy.Mail('example@{0}'.format(self.host))
+        self.mail = lumpy.Mail('example@{}'.format(self.host))
 
     def test___init__(self):
         with self.assertRaises(ValueError):

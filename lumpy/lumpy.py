@@ -51,7 +51,7 @@ class Mail(object):
         logging.info('Resolving DNS query...')
         answers = dns.resolver.query(self.domain, 'MX')
         addresses = [answer.exchange.to_text() for answer in answers]
-        logging.info('{0} records found:\n{1}'.format(len(addresses), '\n  '.join(addresses)))
+        logging.info('{} records found:\n{}'.format(len(addresses), '\n  '.join(addresses)))
         return addresses
 
     def send(self):
@@ -60,7 +60,7 @@ class Mail(object):
         """
         try:
             for mx in self.mxrecords:
-                logging.info('Connecting to {0} {1}...'.format(mx, self.port))
+                logging.info('Connecting to {} {}...'.format(mx, self.port))
                 server = smtplib.SMTP(mx, self.port)
                 server.set_debuglevel(logging.root.level < logging.WARN)
                 server.sendmail(self.sender, [self.recipient], self.message.as_string())
@@ -69,13 +69,13 @@ class Mail(object):
         except Exception as e:
             logging.error(e)
             if isinstance(e, IOError) and e.errno in (errno.ENETUNREACH, errno.ECONNREFUSED):
-                logging.error('Please check that port {0} is open'.format(self.port))
+                logging.error('Please check that port {} is open'.format(self.port))
             if logging.root.level < logging.WARN:
                 raise e
         return False
 
     class Defaults:
-        Sender = '{0}@example.com'.format(getpass.getuser())
+        Sender = '{}@example.com'.format(getpass.getuser())
         Subject = 'Sir! My sir!'
         Body = 'A message from their majesty.'
         Port = smtplib.SMTP_PORT

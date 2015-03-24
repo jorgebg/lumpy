@@ -12,7 +12,7 @@ Sends an email to a **single recipient** straight to his MTA.
 Looks up for the MX DNS records of the recipient SMTP server and attempts the delivery through them.
 
 ## Requirements
-* Python 2.6+
+* Python 2.7+
 
 ## Install
 ```
