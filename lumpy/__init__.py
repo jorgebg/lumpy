@@ -5,5 +5,5 @@ from .lumpy import App, Mail
 
 __author__ = "Jorge Barata"
 __author_email__ = "jorge.barata.gonzalez@gmail.com"
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 __license__ = "MIT"
