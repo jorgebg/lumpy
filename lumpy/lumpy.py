@@ -13,12 +13,13 @@ class Mail(object):
     Sends an email to a single recipient straight to his MTA.
     """
 
-    def __init__(self, recipient, sender=None, subject=None, body=None, port=None, mxrecords=None):
+    def __init__(self, recipient, sender=None, subject=None, body=None, port=None, mxrecords=None, content='plain'):
         self.recipient = recipient
         self.sender = sender or self.Defaults.Sender
         self.subject = subject or self.Defaults.Subject
         self.body = body or self.Defaults.Body
         self.port = port or self.Defaults.Port
+        self.content = content
 
         if not mxrecords:
             mxrecords = self.dnsquery()
@@ -40,7 +41,7 @@ class Mail(object):
         m['Subject'] = self.subject
         m['From'] = self.sender
         m['To'] = self.recipient
-        m.attach(MIMEText(self.body, 'plain'))
+        m.attach(MIMEText(self.body, self.content))
         return m
 
     def dnsquery(self):
