@@ -6,5 +6,5 @@ from .mail import Mail  # noqa
 
 __author__ = "Jorge Barata"
 __author_email__ = "jorge.barata.gonzalez@gmail.com"
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __license__ = "MIT"
