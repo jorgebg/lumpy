@@ -1,14 +1,12 @@
-import unittest
-import threading
-import smtpd
-import smtplib
 import asyncore
 import errno
 import logging
-import sys
-import os
+import smtpd
+import smtplib
 import socket
-import copy
+import sys
+import threading
+import unittest
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -20,12 +18,12 @@ class MTAMock(object):
         self.host = 'localhost'
         self.port = 8025
         self.recipient = 'example@' + self.host
-        self.mxrecords = [ self.host ]
-        localaddr, remoteaddr = (self.host, self.port), (self.host, smtplib.SMTP_PORT)
+        self.mxrecords = [self.host]
+        localaddr = (self.host, self.port)
+        remoteaddr = (self.host, smtplib.SMTP_PORT)
         self.smtp = self.Server(localaddr, remoteaddr)
 
     def start(self):
-        #smtpd.DEBUGSTREAM = sys.stderr
         thread = threading.Thread(target=asyncore.loop)
         thread.daemon = True
         thread.start()
@@ -48,6 +46,7 @@ class MTAMock(object):
 
 MTA = MTAMock()
 MTA.start()
+
 
 class MailTest(unittest.TestCase):
 
@@ -83,7 +82,8 @@ class MailTest(unittest.TestCase):
 class MailSendTest(unittest.TestCase):
 
     def test_send(self):
-        mail = lumpy.Mail(MTA.recipient, mxrecords=MTA.mxrecords, port=MTA.port)
+        mail = lumpy.Mail(
+            MTA.recipient, mxrecords=MTA.mxrecords, port=MTA.port)
         self.assertTrue(mail.send())
 
         for no in (errno.ENETUNREACH, errno.ECONNREFUSED):
@@ -101,30 +101,31 @@ class MailSendTest(unittest.TestCase):
 
             smtplib.SMTP.sendmail = sendmail
 
-class AppTest(unittest.TestCase):
+
+class MainTest(unittest.TestCase):
 
     def setUp(self):
         self.oldargv = sys.argv
 
-        args = dict(
-            recipient = MTA.recipient,
-            mxrecords = ','.join(MTA.mxrecords),
-            port = MTA.port
-        )
+        args = {
+            'recipient': MTA.recipient,
+            'mxrecords': ','.join(MTA.mxrecords),
+            'port': MTA.port
+        }
 
-        self.argv = 'lumpy {recipient} --mxrecords {mxrecords} --port {port}'.format(**args).split(' ')
+        self.argv = ('lumpy {recipient} --mxrecords {mxrecords} --port {port}'
+                     .format(**args).split(' '))
 
     def tearDown(self):
         sys.argv = self.oldargv
 
     def test_run(self):
         sys.argv = self.argv
-        lumpy.App().run()
+        lumpy.run()
 
     def test_run_verbose(self):
-        sys.argv = self.argv + [ '--verbose' ]
-        lumpy.App().run()
-
+        sys.argv = self.argv + ['--verbose']
+        lumpy.run()
 
 
 if __name__ == '__main__':

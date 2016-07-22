@@ -1,7 +1,8 @@
 """
 Sends an email to a single recipient straight to his MTA
 """
-from .lumpy import App, Mail
+from .cli import run  # noqa
+from .mail import Mail  # noqa
 
 __author__ = "Jorge Barata"
 __author_email__ = "jorge.barata.gonzalez@gmail.com"

@@ -1,3 +1,3 @@
-from .lumpy import App
+from . import cli
 
-App().run()
+cli.run()

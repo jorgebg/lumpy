@@ -1,7 +1,7 @@
-from setuptools import setup
 from sys import version_info as pythonversion
 
 import lumpy
+from setuptools import setup
 
 requires = []
 if pythonversion[0] is 3:
@@ -11,15 +11,15 @@ else:
 
 
 setup(
-  name = 'Lumpy',
-  description = lumpy.__doc__,
-  version = lumpy.__version__,
-  packages = ['lumpy'],
-  scripts = ['scripts/lumpy'],
-  install_requires = requires,
-  url = 'https://github.com/jorgebg/lumpy',
-  author = lumpy.__author__,
-  author_email = lumpy.__author_email__,
-  license = lumpy.__license__,
-  keywords = ['mta', 'mua', 'mail', 'smtp', 'mx']
+    name='Lumpy',
+    description=lumpy.__doc__,
+    version=lumpy.__version__,
+    packages=['lumpy'],
+    scripts=['scripts/lumpy'],
+    install_requires=requires,
+    url='https://github.com/jorgebg/lumpy',
+    author=lumpy.__author__,
+    author_email=lumpy.__author_email__,
+    license=lumpy.__license__,
+    keywords=['mta', 'mua', 'mail', 'smtp', 'mx']
 )
