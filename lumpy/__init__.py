@@ -1,5 +1,5 @@
 """
-Sends an email to a single recipient straight to his MTA
+Sends an email to a single recipient straight to the MTA
 """
 from .cli import run  # noqa
 from .mail import Mail  # noqa
