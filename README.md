@@ -8,7 +8,7 @@
 
 [![Stories in Ready](https://badge.waffle.io/jorgebg/lumpy.svg)](http://waffle.io/jorgebg/lumpy)
 
-Sends an email to a **single recipient** straight to his MTA.
+Sends an email to a **single recipient** straight to the MTA.
 Looks up for the MX DNS records of the recipient SMTP server and attempts the delivery through them.
 
 ## Requirements
