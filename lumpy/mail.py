@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 
 class Mail(object):
     """
-    Sends an email to a single recipient straight to his MTA.
+    Sends an email to a single recipient straight to the MTA.
     """
 
     def __init__(self,
